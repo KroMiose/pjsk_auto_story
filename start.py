@@ -2,6 +2,7 @@ import datetime, os, time
 import win32gui,  win32con, win32api
 import pyautogui
 import keyboard
+import traceback
 
 import config
 
@@ -111,7 +112,8 @@ if __name__ == '__main__':
     window_hwnd = win32gui.GetForegroundWindow()
     try:    # 调整窗口大小
         win32gui.SetWindowPos(int(window_hwnd, 16), win32con.HWND_TOP, 0, 0, config.WINDOW_WIDTH, config.WINDOW_HEIGHT, win32con.SWP_SHOWWINDOW)
-    except:
+    except Exception as e:
+        traceback.print_exc()
         log('调整窗口时发生错误，请检查窗口句柄是否正确！')
         input('按下任意键退出程序...')
         exit(1)
